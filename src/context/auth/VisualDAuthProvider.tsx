@@ -10,7 +10,6 @@ import { RouteNames, StepNames } from '../../utility/getSteps'
 import { AuthFormActionsTypes, AuthFormState, UiActionsTypes, UseAuthProvider } from '../typings.context'
 import { UiProvider } from '../ui/UiProvider'
 import { authFormReducer } from './authFormReducer'
-
 ;(window as any).Buffer = Buffer
 export const initialAuthFormState = {
   username: '',

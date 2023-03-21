@@ -1,11 +1,7 @@
-import Web3 from "web3";
-import env from "react-dotenv";
+import Web3 from 'web3'
+// import env from 'react-dotenv'
 
-import {
-  contractABI,
-  developmentContractAddress,
-  productionContractAddress,
-} from "../contract/contractABI";
+import { contractABI, developmentContractAddress, productionContractAddress } from '../contract/contractABI'
 
 import {
   isUsernameTaken,
@@ -14,11 +10,11 @@ import {
   loginRegisteredUser,
   resetUserPwd,
   verifyMnemonicPhrase,
-} from "../services";
+} from '../services'
 
 declare global {
   interface Window {
-    ethereum: any;
+    ethereum: any
   }
 }
 
@@ -41,71 +37,63 @@ declare global {
  */
 
 export enum ContractMethods {
-  IS_USERNAME_TAKEN = "isUsernameTaken",
-  CREATE_NEW_USER = "createNewUser",
-  GET_MNEMONIC_PHRASE = "getMnemonicPhrase",
-  LOGIN_REGISTERED_USER = "loginRegisteredUser",
-  RESET_USER_PASSWORD = "resetUserPwd",
-  VERIFY_MNEMONIC_PHRASE = "verifyMnemonicPhrase",
+  IS_USERNAME_TAKEN = 'isUsernameTaken',
+  CREATE_NEW_USER = 'createNewUser',
+  GET_MNEMONIC_PHRASE = 'getMnemonicPhrase',
+  LOGIN_REGISTERED_USER = 'loginRegisteredUser',
+  RESET_USER_PASSWORD = 'resetUserPwd',
+  VERIFY_MNEMONIC_PHRASE = 'verifyMnemonicPhrase',
 }
 
 export const fetchContractMethod = async (
   ContractMethod: ContractMethods,
-  mode: "Production" | "Development",
+  mode: 'Production' | 'Development',
   walletAddress: string,
   privateKey: string,
   useWindowWallet: boolean,
   methodParams: any | null,
-  setLoader: (value: boolean) => void
+  setLoader: (value: boolean) => void,
 ): Promise<any> => {
-  let web3: any;
-  let contractAddress: any;
-  let wallet: any;
-  if (mode === "Production" && !useWindowWallet) {
-    contractAddress = productionContractAddress;
-    web3 = new Web3(new Web3.providers.HttpProvider(env.INFURA_PRODUCTION_URL));
-  } else if (mode === "Development" && !useWindowWallet) {
-    contractAddress = developmentContractAddress;
-    web3 = new Web3(
-      new Web3.providers.HttpProvider(env.INFURA_DEVELOPMENT_URL)
-    );
+  let web3: any
+  let contractAddress: any
+  let wallet: any
+  if (mode === 'Production' && !useWindowWallet) {
+    contractAddress = productionContractAddress
+    web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/bcd48c1e38574c1697634dfd5c66edf4'))
+  } else if (mode === 'Development' && !useWindowWallet) {
+    contractAddress = developmentContractAddress
+    web3 = new Web3(new Web3.providers.HttpProvider('https://goerli.infura.io/v3/bcd48c1e38574c1697634dfd5c66edf4'))
     // web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-  } else if (mode === "Production" && useWindowWallet) {
-    contractAddress = productionContractAddress;
-    web3 = new Web3(window.ethereum);
-  } else if (mode === "Development" && useWindowWallet) {
-    contractAddress = developmentContractAddress;
-    web3 = new Web3(window.ethereum);
+  } else if (mode === 'Production' && useWindowWallet) {
+    contractAddress = productionContractAddress
+    web3 = new Web3(window.ethereum)
+  } else if (mode === 'Development' && useWindowWallet) {
+    contractAddress = developmentContractAddress
+    web3 = new Web3(window.ethereum)
   } else {
-    contractAddress = env.DEVELOPMENT_CONTRACT_ADDRESS;
-    web3 = new Web3(new Web3.providers.HttpProvider(env.LOCAL_HOST_URL));
+    contractAddress = developmentContractAddress
+    web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'))
   }
 
-  const account = await web3.eth
-    .getAccounts()
-    .then((accounts: any) => accounts[0]);
-  const contract: any = new web3.eth.Contract(contractABI, contractAddress);
+  const account = await web3.eth.getAccounts().then((accounts: any) => accounts[0])
+  const contract: any = new web3.eth.Contract(contractABI, contractAddress)
   if (!walletAddress && !privateKey && account) {
-    wallet = account;
+    wallet = account
   } else {
-    wallet = walletAddress;
+    wallet = walletAddress
   }
 
   const transaction = {
     from: web3.utils.toChecksumAddress(wallet),
-    to: env.DEVELOPMENT_CONTRACT_ADDRESS,
-    gas: "3000000",
-  };
+    to: contractAddress,
+    gas: '3000000',
+  }
 
-  let contractResponse;
+  let contractResponse
   switch (ContractMethod) {
     case ContractMethods.IS_USERNAME_TAKEN:
-      contractResponse = await isUsernameTaken(
-        methodParams.username,
-        contract,
-        setLoader
-      );
-      break;
+      contractResponse = await isUsernameTaken(methodParams.username, contract, setLoader)
+      break
     case ContractMethods.CREATE_NEW_USER:
       contractResponse = await createNewUser(
         methodParams.username,
@@ -116,36 +104,27 @@ export const fetchContractMethod = async (
         contract,
         web3,
         transaction,
-        setLoader
-      );
-      break;
+        setLoader,
+      )
+      break
 
     case ContractMethods.LOGIN_REGISTERED_USER:
-      contractResponse = await loginRegisteredUser(
-        methodParams.username,
-        methodParams.pwdHash,
-        contract,
-        setLoader
-      );
-      break;
+      contractResponse = await loginRegisteredUser(methodParams.username, methodParams.pwdHash, contract, setLoader)
+      break
 
     case ContractMethods.GET_MNEMONIC_PHRASE:
-      contractResponse = await getMnemonicPhrase(
-        methodParams.username,
-        contract,
-        setLoader
-      );
+      contractResponse = await getMnemonicPhrase(methodParams.username, contract, setLoader)
       // console.log("GetMnemonicFetch", { contractResponse });
-      break;
+      break
 
     case ContractMethods.VERIFY_MNEMONIC_PHRASE:
       contractResponse = await verifyMnemonicPhrase(
         methodParams.username,
         methodParams.mnemonicPhrase,
         contract,
-        setLoader
-      );
-      break;
+        setLoader,
+      )
+      break
 
     case ContractMethods.RESET_USER_PASSWORD:
       contractResponse = await resetUserPwd(
@@ -156,9 +135,9 @@ export const fetchContractMethod = async (
         transaction,
         web3,
         useWindowWallet,
-        setLoader
-      );
-      break;
+        setLoader,
+      )
+      break
   }
-  return contractResponse;
-};
+  return contractResponse
+}

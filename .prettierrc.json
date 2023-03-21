@@ -6,5 +6,6 @@
   "semi": false,
   "printWidth": 120,
   "jsxSingleQuote": true,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "quoteProps": "as-needed"
 }

@@ -1,2 +1,2 @@
-export { VisualDAuthProvider } from "./context/auth/VisualDAuthProvider";
-export { AuthButton } from "./components";
+export { VisualDAuthProvider } from './context/auth/VisualDAuthProvider'
+export { AuthButton } from './components'

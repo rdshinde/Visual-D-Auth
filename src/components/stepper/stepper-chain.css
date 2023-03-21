@@ -1,7 +1,0 @@
-.stepper-li-filled::after {
-  border: 1px solid #00b0ff;
-  content: "";
-  display: inline-block;
-  width: 100px !important;
-  height: 0.5px;
-}

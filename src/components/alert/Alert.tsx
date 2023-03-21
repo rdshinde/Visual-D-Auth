@@ -1,22 +1,21 @@
-import React from "react";
-import { Toaster } from "react-hot-toast";
-import "tailwindcss/dist/tailwind.css";
+import React from 'react'
+import { Toaster } from 'react-hot-toast'
 
 export const Alert = () => {
   return (
     <Toaster
-      position="top-center"
+      position='top-center'
       reverseOrder={false}
       gutter={8}
-      containerClassName=""
+      containerClassName=''
       containerStyle={{}}
       toastOptions={{
         // Define default options
-        className: "",
+        className: '',
         duration: 3000,
         style: {
-          background: "#363636",
-          color: "#fff",
+          background: '#363636',
+          color: '#fff',
         },
         // Default options for specific types
         success: {
@@ -24,5 +23,5 @@ export const Alert = () => {
         },
       }}
     />
-  );
-};
+  )
+}

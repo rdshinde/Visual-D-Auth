@@ -1,19 +1,19 @@
 export enum RouteNames {
-  REGISTER = "register",
-  RECOVER = "recover",
-  LOGIN = "login",
+  REGISTER = 'register',
+  RECOVER = 'recover',
+  LOGIN = 'login',
 }
 export enum StepNames {
-  USERNAME = "Username",
-  PASSWORD = "Password",
-  VERIFY = "Verify",
-  DONE = "Done!", 
+  USERNAME = 'Username',
+  PASSWORD = 'Password',
+  VERIFY = 'Verify',
+  DONE = 'Done!',
 }
 export interface Step {
-  stepName: StepNames;
-  stepNumber: number;
-  isActive: boolean;
-  isCompleted: boolean;
+  stepName: StepNames
+  stepNumber: number
+  isActive: boolean
+  isCompleted: boolean
 }
 
 export const getSteps = (payload: string): Step[] => {
@@ -38,7 +38,7 @@ export const getSteps = (payload: string): Step[] => {
           isActive: false,
           isCompleted: false,
         },
-      ];
+      ]
     case RouteNames.RECOVER:
       return [
         {
@@ -65,7 +65,7 @@ export const getSteps = (payload: string): Step[] => {
           isActive: false,
           isCompleted: false,
         },
-      ];
+      ]
     case RouteNames.LOGIN:
       return [
         {
@@ -86,8 +86,8 @@ export const getSteps = (payload: string): Step[] => {
           isActive: false,
           isCompleted: false,
         },
-      ];
+      ]
     default:
-      return [];
+      return []
   }
-};
+}

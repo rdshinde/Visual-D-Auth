@@ -1,4 +1,3 @@
-
 /**
  * @param {string} userName
  * @param {string} password
@@ -29,33 +28,26 @@ export const createNewUser = async (
   contract: any,
   web3: any,
   transactionObj: any,
-  setLoader: (value: boolean) => void
+  setLoader: (value: boolean) => void,
 ) => {
   const transaction = {
     ...transactionObj,
-    data: contract.methods
-      .addNewUser(userName, password, mnemonicPhrase)
-      .encodeABI(),
-  };
+    data: contract.methods.addNewUser(userName, password, mnemonicPhrase).encodeABI(),
+  }
   try {
-    setLoader(true);
+    setLoader(true)
     if (privateKey && !useWindowWallet) {
       // If a private key is provided, sign the transaction with it
-      const signedTx: any = await web3.eth.accounts.signTransaction(
-        transaction,
-        privateKey
-      );
-      const txReceipt = await web3.eth.sendSignedTransaction(
-        signedTx.rawTransaction
-      );
+      const signedTx: any = await web3.eth.accounts.signTransaction(transaction, privateKey)
+      const txReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction)
 
       if (txReceipt.status) {
-        const events = await contract.getPastEvents("NewUserAdded", {
+        const events = await contract.getPastEvents('NewUserAdded', {
           fromBlock: txReceipt.blockNumber,
           toBlock: txReceipt.blockNumber,
-        });
+        })
 
-        const { userCount, userId, username, message } = events[0].returnValues;
+        const { userCount, userId, username, message } = events[0].returnValues
         const resultObj = {
           userCount: userCount,
           userId: userId,
@@ -63,28 +55,28 @@ export const createNewUser = async (
           message: message,
           status: true,
           transactionHash: txReceipt.transactionHash,
-        };
-        return resultObj;
+        }
+        return resultObj
       } else {
         const resultObj = {
-          message: "Transaction Failed",
+          message: 'Transaction Failed',
           status: false,
-        };
-        return resultObj;
+        }
+        return resultObj
       }
     } else {
       // Otherwise, prompt the user to sign the transaction with their browser wallet
       const tx = await window.ethereum.request({
-        method: "eth_sendTransaction",
+        method: 'eth_sendTransaction',
         params: [transaction],
-      });
-      const txReceipt = await web3.eth.getTransactionReceipt(tx);
+      })
+      const txReceipt = await web3.eth.getTransactionReceipt(tx)
       if (txReceipt.status) {
-        const events = await contract.getPastEvents("NewUserAdded", {
+        const events = await contract.getPastEvents('NewUserAdded', {
           fromBlock: txReceipt.blockNumber,
           toBlock: txReceipt.blockNumber,
-        });
-        const { userCount, userId, username, message } = events[0].returnValues;
+        })
+        const { userCount, userId, username, message } = events[0].returnValues
         const resultObj = {
           userCount: userCount,
           userId: userId,
@@ -92,23 +84,23 @@ export const createNewUser = async (
           message: message,
           status: true,
           transactionHash: txReceipt.transactionHash,
-        };
-        return resultObj;
+        }
+        return resultObj
       } else {
         const resultObj = {
-          message: "Transaction Failed",
+          message: 'Transaction Failed',
           status: false,
-        };
-        return resultObj;
+        }
+        return resultObj
       }
     }
   } catch (error: any) {
     const resultObj = {
       message: error.message,
       status: false,
-    };
-    return resultObj;
+    }
+    return resultObj
   } finally {
-    setLoader(false);
+    setLoader(false)
   }
-};
+}

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react'
 import {
   AuthOptions,
   MnemonicInput,
@@ -6,34 +6,31 @@ import {
   PwdBuilder,
   SuccessGif,
   UserNameField,
-} from "../components";
-import { RouteNames, StepNames } from "./getSteps";
+} from '../components'
+import { RouteNames, StepNames } from './getSteps'
 
-export const componentRenderingHandler = (
-  currentStep: StepNames | any,
-  chosenRoute: RouteNames | any
-): ReactNode => {
+export const componentRenderingHandler = (currentStep: StepNames | any, chosenRoute: RouteNames | any): ReactNode => {
   switch (currentStep) {
     case StepNames.USERNAME:
       return (
         <>
           <UserNameField />
         </>
-      );
+      )
 
     case StepNames.PASSWORD:
       return (
         <>
           <PwdBuilder />
         </>
-      );
+      )
 
     case StepNames.VERIFY:
       return (
         <>
           <MnemonicInput />
         </>
-      );
+      )
 
     case StepNames.DONE:
       if (chosenRoute === RouteNames.REGISTER) {
@@ -41,16 +38,16 @@ export const componentRenderingHandler = (
           <>
             <MnemonicPhraseContainer />
           </>
-        );
+        )
       } else {
         return (
           <>
             <SuccessGif />
           </>
-        );
+        )
       }
 
     default:
-      return <AuthOptions />;
+      return <AuthOptions />
   }
-};
+}

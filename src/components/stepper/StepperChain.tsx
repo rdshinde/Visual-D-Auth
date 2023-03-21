@@ -1,18 +1,17 @@
-import { SmallSpinner } from "../icons/small-spinner/SmallSpinner";
-import { StepperTrueTick } from "../icons/stepper-true-tick/StepperTrueTick";
-import "./stepper-chain.css";
+import React from 'react'
+
+import { SmallSpinner } from '../icons/small-spinner/SmallSpinner'
+import { StepperTrueTick } from '../icons/stepper-true-tick/StepperTrueTick'
 type step = {
-  stepName: string;
-  stepNumber: number;
-  isActive: boolean;
-  isCompleted: boolean;
-};
-import "tailwindcss/dist/tailwind.css";
-import React from "react";
+  stepName: string
+  stepNumber: number
+  isActive: boolean
+  isCompleted: boolean
+}
 
 type Props = {
-  steps: step[];
-};
+  steps: step[]
+}
 
 export const StepperChain = ({ steps }: Props) => {
   return (
@@ -23,29 +22,26 @@ export const StepperChain = ({ steps }: Props) => {
         return (
           <li
             className={`flex items-center px-0 ${
-              step.stepNumber < steps?.length ? "w-full" : "after:hidden"
+              step.stepNumber < steps?.length ? 'w-full' : 'after:hidden'
             } after:inline-block after:content-[""] after:w-full after:h-[0.5px] ${
-              step.isCompleted && "after:border-blue after:border-[1px]"
+              step.isCompleted && 'after:border-blue after:border-[1px]'
             }
             after:border-b  after:mx-2 after:my-2`}
             key={step.stepNumber}
           >
             <span
               className={`flex items-center ${
-                index < 2 &&
-                "after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200 "
+                index < 2 && "after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200 "
               }`}
             >
               {step.isCompleted ? (
-                <span className="text-blue">
+                <span className='text-blue'>
                   <StepperTrueTick />
                 </span>
               ) : (
-                <span
-                  className={`mr-2 ${step.isActive && "text-blue font-bold"}`}
-                >
+                <span className={`mr-2 ${step.isActive && 'text-blue font-bold'}`}>
                   {step.isActive ? (
-                    <span className="text-blue">
+                    <span className='text-blue'>
                       <SmallSpinner />
                     </span>
                   ) : (
@@ -54,18 +50,16 @@ export const StepperChain = ({ steps }: Props) => {
                 </span>
               )}
               {step.isActive ? (
-                <span className="text-blue font-bold">{step.stepName}</span>
+                <span className='text-blue font-bold'>{step.stepName}</span>
               ) : step.isCompleted ? (
-                <span className="text-blue font-extrabold">
-                  {step.stepName}
-                </span>
+                <span className='text-blue font-extrabold'>{step.stepName}</span>
               ) : (
-                <span className="font-semibold">{step.stepName}</span>
+                <span className='font-semibold'>{step.stepName}</span>
               )}
             </span>
           </li>
-        );
+        )
       })}
     </ol>
-  );
-};
+  )
+}

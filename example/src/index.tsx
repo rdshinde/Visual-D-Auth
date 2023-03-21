@@ -10,7 +10,6 @@ ReactDOM.render(
       useWindowWallet={false}
       onErrorHandler={(error) => console.log(error)}
       onSuccessHandler={(result) => console.log(result)}
-      // children={''}
     >
       <div id='auth-form'>
         <AuthButton />

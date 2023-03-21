@@ -10,6 +10,7 @@ The NPM package for your projects decentralised graphical password authenticatio
 [npm-typescript]: [https://img.shields.io/npm/types/react-visual-d-auth]
 [github-license]: [https://img.shields.io/github/license/rdshinde/Visual-D-Auth]
 
+
 ## Table of Contents
 
 - [Introduction](#introduction)

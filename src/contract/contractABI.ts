@@ -1,8 +1,9 @@
 // import env from 'react-dotenv'
 
-export const developmentContractAddress = '0x8F012FEB22850CcF7785429F0214e8ad0A5c3EEA'
+export const developmentContractAddress = '0x3ceBeB08201A0882Ce98aBC37231487c83063481'
 
-export const productionContractAddress = '0xA40566f39ca3ad0281E8952226fF3e6918274394'
+export const productionContractAddress = '0x3ceBeB08201A0882Ce98aBC37231487c83063481'
+
 export const contractABI: any = [
   {
     inputs: [

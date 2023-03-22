@@ -22,7 +22,7 @@ const readImages = () => {
   for (let i = 1; i <= 24; i++) {
     images.push({
       id: uuid(),
-      imageSrc: `images/image_${i}.jpg`,
+      imageSrc: `https://picsum.photos/150/150?random=${i}`,
       imageAlt: uuid(),
     })
   }

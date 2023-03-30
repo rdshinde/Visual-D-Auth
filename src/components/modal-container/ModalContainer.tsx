@@ -1,14 +1,14 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-
+import React from 'react';
+import { motion } from 'framer-motion';
+import '../../styles/style.css';
 type Props = {
-  children: React.ReactNode
-  styles?: React.CSSProperties
-  className?: string
-}
+  children: React.ReactNode;
+  styles?: React.CSSProperties;
+  className?: string;
+};
 
 export const ModalContainer = (props: Props) => {
-  const { children, styles, className } = props
+  const { children, styles, className } = props;
   return (
     <motion.div
       id='modal-container'
@@ -25,5 +25,5 @@ export const ModalContainer = (props: Props) => {
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};

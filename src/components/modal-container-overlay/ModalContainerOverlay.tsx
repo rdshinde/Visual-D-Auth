@@ -1,39 +1,39 @@
-import React from 'react'
-import { createPortal } from 'react-dom'
+import React from 'react';
+import { createPortal } from 'react-dom';
 
-import { UiActionsTypes } from '../../context/typings.context'
-import { useUi } from '../../context/ui/UiProvider'
-import { StepNames } from '../../utility/getSteps'
+import { UiActionsTypes } from '../../context/typings.context';
+import { useUi } from '../../context/ui/UiProvider';
+import { StepNames } from '../../utility/getSteps';
 type Props = {
-  children?: React.ReactNode
-  styles?: React.CSSProperties
-  className?: string
-}
+  children?: React.ReactNode;
+  styles?: React.CSSProperties;
+  className?: string;
+};
 
 export const ModalContainerOverlay = (props: Props) => {
   const {
     uiDispatch,
     uiState: { currentStep },
-  } = useUi()
-  const { styles, children, className } = props
-  const modalRoot = document.getElementById('root')
+  } = useUi();
+  const { styles, children, className } = props;
+  const modalRoot = document.getElementById('root');
   if (!modalRoot) {
-    return null
+    return null;
   }
   const closeModalHandler = () => {
     if (currentStep === StepNames.DONE) {
       uiDispatch({
         type: UiActionsTypes.RESET,
-      })
+      });
       uiDispatch({
         type: UiActionsTypes.CLOSE_MODAL,
-      })
-      return
+      });
+      return;
     }
     uiDispatch({
       type: UiActionsTypes.CLOSE_MODAL,
-    })
-  }
+    });
+  };
   return createPortal(
     <div
       style={{ ...styles }}
@@ -43,5 +43,5 @@ export const ModalContainerOverlay = (props: Props) => {
       {children}
     </div>,
     modalRoot,
-  )
-}
+  );
+};

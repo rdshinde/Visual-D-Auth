@@ -1,9 +1,9 @@
-import React from 'react'
-import { useAuthProvider } from '../../context/auth/VisualDAuthProvider'
-import { InputField } from '../input-field/InputField'
+import React from 'react';
+import { useAuthProvider } from '../../context/auth/VisualDAuthProvider';
+import { InputField } from '../input-field/InputField';
 
 export const MnemonicInput = () => {
-  const { userMnemonicPhrase } = useAuthProvider()
+  const { userMnemonicPhrase } = useAuthProvider();
   return (
     <>
       <section className='w-full'>
@@ -24,9 +24,9 @@ export const MnemonicInput = () => {
               inputType={'text'}
               mnemonicWord={word}
             />
-          )
+          );
         })}
       </section>
     </>
-  )
-}
+  );
+};

@@ -1,54 +1,46 @@
-import React from 'react'
-import { useAuthProvider } from '../../context/auth/VisualDAuthProvider'
-import { UiActionsTypes } from '../../context/typings.context'
-import { useUi } from '../../context/ui/UiProvider'
-import { StepNames } from '../../utility/getSteps'
+import React from 'react';
+import { useAuthProvider } from '../../context/auth/VisualDAuthProvider';
+import { UiActionsTypes } from '../../context/typings.context';
+import { useUi } from '../../context/ui/UiProvider';
+import { StepNames } from '../../utility/getSteps';
 
 export const FooterNav = () => {
-  const { uiState, uiDispatch } = useUi()
-  const { allSteps, currentStep, previousStep, nextStep, chosenRoute } = uiState
-  const { contractMethodResponseHandler } = useAuthProvider()
+  const { uiState, uiDispatch } = useUi();
+  const { allSteps, currentStep, previousStep, nextStep, chosenRoute } = uiState;
+  const { contractMethodResponseHandler } = useAuthProvider();
   const nextButtonHandler = () => {
-    const currentStepIndex = allSteps.findIndex((step) => step.stepName === currentStep)
+    const currentStepIndex = allSteps.findIndex((step) => step.stepName === currentStep);
     if (!nextStep) {
-      return
+      return;
     } else {
-      contractMethodResponseHandler(
-        currentStep,
-        nextStep,
-        previousStep,
-        chosenRoute,
-        allSteps,
-        currentStepIndex,
-        uiDispatch,
-      )
+      if (currentStep) contractMethodResponseHandler(currentStep, chosenRoute, allSteps, currentStepIndex, uiDispatch);
       // uiDispatch({
       //   type: UiActionsTypes.GO_TO_NEXT_STEP,
       //   payload: allSteps[currentStepIndex + 1].stepName || "",
       // });
     }
-  }
+  };
   const previousButtonHandler = () => {
-    const currentStepIndex = allSteps.findIndex((step) => step.stepName === currentStep)
+    const currentStepIndex = allSteps.findIndex((step) => step.stepName === currentStep);
 
     if (!previousStep || currentStep === allSteps[0].stepName) {
       uiDispatch({
         type: UiActionsTypes.RESET,
-      })
-      return
+      });
+      return;
     } else {
       uiDispatch({
         type: UiActionsTypes.GO_TO_PREVIOUS_STEP,
         payload: allSteps[currentStepIndex - 1].stepName || '',
-      })
+      });
     }
-  }
+  };
 
   const closeModalHandler = () => {
     uiDispatch({
       type: UiActionsTypes.RESET,
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -107,5 +99,5 @@ export const FooterNav = () => {
         </nav>
       )}
     </>
-  )
-}
+  );
+};

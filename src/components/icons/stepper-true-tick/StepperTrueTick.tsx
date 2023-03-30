@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const StepperTrueTick = () => {
   return (
@@ -15,5 +15,5 @@ export const StepperTrueTick = () => {
         clipRule='evenodd'
       ></path>
     </svg>
-  )
-}
+  );
+};

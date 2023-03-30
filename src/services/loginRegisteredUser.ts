@@ -17,22 +17,22 @@ export const loginRegisteredUser = async (
   setLoader: (value: boolean) => void,
 ) => {
   try {
-    setLoader(true)
-    const result = await contract.methods.loginRegisteredUser(username, password).call()
+    setLoader(true);
+    const result = await contract.methods.loginRegisteredUser(username, password).call();
     const resultObj = {
       message: result.message,
       userLogin: result.result,
       status: result.status,
-    }
-    return resultObj
+    };
+    return resultObj;
   } catch (err: any) {
     const resultObj = {
       message: err.message,
       result: null,
       status: false,
-    }
-    return resultObj
+    };
+    return resultObj;
   } finally {
-    setLoader(false)
+    setLoader(false);
   }
-}
+};

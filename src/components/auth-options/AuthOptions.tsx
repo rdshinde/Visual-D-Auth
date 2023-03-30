@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import { UiActionsTypes } from '../../context/typings.context'
-import { useUi } from '../../context/ui/UiProvider'
-import { LoginIcon } from '../icons/user-icons/LoginIcon'
-import { RegisterIcon } from '../icons/user-icons/RegisterIcon'
+import React, { useEffect, useState } from 'react';
+import { UiActionsTypes } from '../../context/typings.context';
+import { useUi } from '../../context/ui/UiProvider';
+import { LoginIcon } from '../icons/user-icons/LoginIcon';
+import { RegisterIcon } from '../icons/user-icons/RegisterIcon';
 
 export const AuthOptions = () => {
-  const { uiState, uiDispatch } = useUi()
-  const [route, setRoute] = useState<string>('')
+  const { uiState, uiDispatch } = useUi();
+  const [route, setRoute] = useState<string>('');
 
   const handleRoute = (route: string) => {
-    setRoute(route)
-  }
+    setRoute(route);
+  };
 
   useEffect(() => {
     if (route === 'register') {
-      uiDispatch({ type: UiActionsTypes.SET_ROUTE, payload: 'register' })
+      uiDispatch({ type: UiActionsTypes.SET_ROUTE, payload: 'register' });
     } else if (route === 'login') {
-      uiDispatch({ type: UiActionsTypes.SET_ROUTE, payload: 'login' })
+      uiDispatch({ type: UiActionsTypes.SET_ROUTE, payload: 'login' });
     } else if (route === 'recover') {
-      uiDispatch({ type: UiActionsTypes.SET_ROUTE, payload: 'recover' })
+      uiDispatch({ type: UiActionsTypes.SET_ROUTE, payload: 'recover' });
     } else {
-      uiDispatch({ type: UiActionsTypes.SET_ROUTE, payload: '' })
+      uiDispatch({ type: UiActionsTypes.SET_ROUTE, payload: '' });
     }
-  }, [route, uiDispatch])
+  }, [route, uiDispatch]);
 
   return (
     <>
@@ -78,5 +78,5 @@ export const AuthOptions = () => {
         </p>
       </section>
     </>
-  )
-}
+  );
+};

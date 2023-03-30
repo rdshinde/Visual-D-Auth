@@ -1,14 +1,14 @@
-import React from 'react'
-import { Draggable, Droppable } from 'react-beautiful-dnd'
+import React from 'react';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 
-import { Images } from '../pwd-builder/PwdBuilder'
+import { Images } from '../pwd-builder/PwdBuilder';
 type Props = {
-  children?: React.ReactNode
-  styles?: React.CSSProperties
-  data?: {}
-  className?: string
-  gridImages: Images[]
-}
+  children?: React.ReactNode;
+  styles?: React.CSSProperties;
+  data?: object;
+  className?: string;
+  gridImages: Images[];
+};
 
 export const GridContainer = (props: Props) => {
   function getStyle(style: any, snapshot: any) {
@@ -17,20 +17,20 @@ export const GridContainer = (props: Props) => {
         ...style,
         transform: 'none',
         transition: 'none',
-      }
+      };
     } else if (snapshot.isDraggingOver) {
       return {
         border: '1px solid orange',
         ...style,
         transitionDuration: `all 0.1s ease-in-out`,
-      }
+      };
     }
     return {
       ...style,
       transitionDuration: `0.0001s`,
-    }
+    };
   }
-  const { children, styles, className, gridImages } = props
+  const { children, styles, className, gridImages } = props;
   return (
     <Droppable droppableId='gridContainer' direction='horizontal'>
       {(provided, snapshot) => (
@@ -72,11 +72,11 @@ export const GridContainer = (props: Props) => {
                   </div>
                 )}
               </Draggable>
-            )
+            );
           })}
           {/* {provided.placeholder} */}
         </div>
       )}
     </Droppable>
-  )
-}
+  );
+};

@@ -1,7 +1,7 @@
-import Web3 from 'web3'
+import Web3 from 'web3';
 // import env from 'react-dotenv'
 
-import { contractABI, developmentContractAddress, productionContractAddress } from '../contract/contractABI'
+import { contractABI, developmentContractAddress, productionContractAddress } from '../contract/contractABI';
 
 import {
   isUsernameTaken,
@@ -10,11 +10,11 @@ import {
   loginRegisteredUser,
   resetUserPwd,
   verifyMnemonicPhrase,
-} from '../services'
+} from '../services';
 
 declare global {
   interface Window {
-    ethereum: any
+    ethereum: any;
   }
 }
 
@@ -54,46 +54,46 @@ export const fetchContractMethod = async (
   methodParams: any | null,
   setLoader: (value: boolean) => void,
 ): Promise<any> => {
-  let web3: any
-  let contractAddress: any
-  let wallet: any
+  let web3: any;
+  let contractAddress: any;
+  let wallet: any;
   if (mode === 'Production' && !useWindowWallet) {
-    contractAddress = productionContractAddress
-    web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/bcd48c1e38574c1697634dfd5c66edf4'))
+    contractAddress = productionContractAddress;
+    web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/bcd48c1e38574c1697634dfd5c66edf4'));
   } else if (mode === 'Development' && !useWindowWallet) {
-    contractAddress = developmentContractAddress
-    web3 = new Web3(new Web3.providers.HttpProvider('https://goerli.infura.io/v3/bcd48c1e38574c1697634dfd5c66edf4'))
+    contractAddress = developmentContractAddress;
+    web3 = new Web3(new Web3.providers.HttpProvider('https://goerli.infura.io/v3/bcd48c1e38574c1697634dfd5c66edf4'));
     // web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
   } else if (mode === 'Production' && useWindowWallet) {
-    contractAddress = productionContractAddress
-    web3 = new Web3(window.ethereum)
+    contractAddress = productionContractAddress;
+    web3 = new Web3(window.ethereum);
   } else if (mode === 'Development' && useWindowWallet) {
-    contractAddress = developmentContractAddress
-    web3 = new Web3(window.ethereum)
+    contractAddress = developmentContractAddress;
+    web3 = new Web3(window.ethereum);
   } else {
-    contractAddress = developmentContractAddress
-    web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'))
+    contractAddress = developmentContractAddress;
+    web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
   }
 
-  const account = await web3.eth.getAccounts().then((accounts: any) => accounts[0])
-  const contract: any = new web3.eth.Contract(contractABI, contractAddress)
+  const account = await web3.eth.getAccounts().then((accounts: any) => accounts[0]);
+  const contract: any = new web3.eth.Contract(contractABI, contractAddress);
   if (!walletAddress && !privateKey && account) {
-    wallet = account
+    wallet = account;
   } else {
-    wallet = walletAddress
+    wallet = walletAddress;
   }
 
   const transaction = {
     from: web3.utils.toChecksumAddress(wallet),
     to: contractAddress,
     gas: '3000000',
-  }
+  };
 
-  let contractResponse
+  let contractResponse;
   switch (ContractMethod) {
     case ContractMethods.IS_USERNAME_TAKEN:
-      contractResponse = await isUsernameTaken(methodParams.username, contract, setLoader)
-      break
+      contractResponse = await isUsernameTaken(methodParams.username, contract, setLoader);
+      break;
     case ContractMethods.CREATE_NEW_USER:
       contractResponse = await createNewUser(
         methodParams.username,
@@ -105,17 +105,17 @@ export const fetchContractMethod = async (
         web3,
         transaction,
         setLoader,
-      )
-      break
+      );
+      break;
 
     case ContractMethods.LOGIN_REGISTERED_USER:
-      contractResponse = await loginRegisteredUser(methodParams.username, methodParams.pwdHash, contract, setLoader)
-      break
+      contractResponse = await loginRegisteredUser(methodParams.username, methodParams.pwdHash, contract, setLoader);
+      break;
 
     case ContractMethods.GET_MNEMONIC_PHRASE:
-      contractResponse = await getMnemonicPhrase(methodParams.username, contract, setLoader)
+      contractResponse = await getMnemonicPhrase(methodParams.username, contract, setLoader);
       // console.log("GetMnemonicFetch", { contractResponse });
-      break
+      break;
 
     case ContractMethods.VERIFY_MNEMONIC_PHRASE:
       contractResponse = await verifyMnemonicPhrase(
@@ -123,8 +123,8 @@ export const fetchContractMethod = async (
         methodParams.mnemonicPhrase,
         contract,
         setLoader,
-      )
-      break
+      );
+      break;
 
     case ContractMethods.RESET_USER_PASSWORD:
       contractResponse = await resetUserPwd(
@@ -136,8 +136,8 @@ export const fetchContractMethod = async (
         web3,
         useWindowWallet,
         setLoader,
-      )
-      break
+      );
+      break;
   }
-  return contractResponse
-}
+  return contractResponse;
+};

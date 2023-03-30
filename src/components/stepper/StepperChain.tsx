@@ -1,17 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-import { SmallSpinner } from '../icons/small-spinner/SmallSpinner'
-import { StepperTrueTick } from '../icons/stepper-true-tick/StepperTrueTick'
+import { SmallSpinner } from '../icons/small-spinner/SmallSpinner';
+import { StepperTrueTick } from '../icons/stepper-true-tick/StepperTrueTick';
 type step = {
-  stepName: string
-  stepNumber: number
-  isActive: boolean
-  isCompleted: boolean
-}
+  stepName: string;
+  stepNumber: number;
+  isActive: boolean;
+  isCompleted: boolean;
+};
 
 type Props = {
-  steps: step[]
-}
+  steps: step[];
+};
 
 export const StepperChain = ({ steps }: Props) => {
   return (
@@ -58,8 +58,8 @@ export const StepperChain = ({ steps }: Props) => {
               )}
             </span>
           </li>
-        )
+        );
       })}
     </ol>
-  )
-}
+  );
+};

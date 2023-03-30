@@ -12,4 +12,4 @@ export const getImageMetaData = async () => {
   // } catch (error) {
   //   console.error(error);
   // }
-}
+};

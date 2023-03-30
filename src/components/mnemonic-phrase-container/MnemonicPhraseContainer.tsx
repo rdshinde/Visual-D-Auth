@@ -1,16 +1,16 @@
-import React from 'react'
-import { useAuthProvider } from '../../context/auth/VisualDAuthProvider'
+import React from 'react';
+import { useAuthProvider } from '../../context/auth/VisualDAuthProvider';
 
 export const MnemonicPhraseContainer = () => {
   const copyToClipBoardHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const phrase = e.currentTarget.parentElement?.querySelector('span')
+    const phrase = e.currentTarget.parentElement?.querySelector('span');
     if (phrase) {
-      navigator.clipboard.writeText(phrase.textContent || '')
-      e.currentTarget.style.fontSize = '0.9rem'
-      e.currentTarget.innerHTML = `Copied!`
+      navigator.clipboard.writeText(phrase.textContent || '');
+      e.currentTarget.style.fontSize = '0.9rem';
+      e.currentTarget.innerHTML = `Copied!`;
     }
-  }
-  const { authFormState } = useAuthProvider()
+  };
+  const { authFormState } = useAuthProvider();
   return (
     <>
       <section className='w-full'>
@@ -50,5 +50,5 @@ export const MnemonicPhraseContainer = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};

@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 type Props = {
-  imageSrc: string
-  imageAlt: string
-  snapshot: any
-  pwdVisibility: boolean
-}
+  imageSrc: string;
+  imageAlt: string;
+  snapshot: any;
+  pwdVisibility: boolean;
+};
 
 export const ImageContainer = ({ imageSrc, imageAlt, snapshot, pwdVisibility }: Props) => {
   return (
@@ -27,5 +27,5 @@ export const ImageContainer = ({ imageSrc, imageAlt, snapshot, pwdVisibility }: 
         />
       </div>
     </>
-  )
-}
+  );
+};

@@ -1,33 +1,33 @@
-import React, { useEffect } from 'react'
-import { DragDropContext, DropResult } from 'react-beautiful-dnd'
-import { toast } from 'react-hot-toast'
-import uuid from 'react-uuid'
-import { useAuthProvider } from '../../context/auth/VisualDAuthProvider'
-import { AuthFormActionsTypes } from '../../context/typings.context'
-import { useUi } from '../../context/ui/UiProvider'
-import { RouteNames } from '../../utility/getSteps'
-import { GridContainer } from '../grid-container/GridContainer'
-import { HidePwdEye } from '../icons/pwd-eye-icon/HidePwdEye'
-import { ShowPwdEye } from '../icons/pwd-eye-icon/ShowPwdEye'
-import { PwdContainer } from '../pwd-container/PwdContainer'
+import React, { useEffect } from 'react';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { toast } from 'react-hot-toast';
+import uuid from 'react-uuid';
+import { useAuthProvider } from '../../context/auth/VisualDAuthProvider';
+import { AuthFormActionsTypes } from '../../context/typings.context';
+import { useUi } from '../../context/ui/UiProvider';
+import { RouteNames } from '../../utility/getSteps';
+import { GridContainer } from '../grid-container/GridContainer';
+import { HidePwdEye } from '../icons/pwd-eye-icon/HidePwdEye';
+import { ShowPwdEye } from '../icons/pwd-eye-icon/ShowPwdEye';
+import { PwdContainer } from '../pwd-container/PwdContainer';
 
 export type Images = {
-  imageSrc: string
-  imageAlt: string
-  id: string
-}
-const gridImagesArray: Images[] = []
+  imageSrc: string;
+  imageAlt: string;
+  id: string;
+};
+const gridImagesArray: Images[] = [];
 const readImages = () => {
-  const images = []
+  const images = [];
   for (let i = 1; i <= 24; i++) {
     images.push({
       id: uuid(),
       imageSrc: `https://picsum.photos/150/150?random=${i}`,
       imageAlt: uuid(),
-    })
+    });
   }
-  return images
-}
+  return images;
+};
 const pwdImagesArray = [
   { id: uuid() },
   { id: uuid() },
@@ -37,102 +37,102 @@ const pwdImagesArray = [
   { id: uuid() },
   { id: uuid() },
   { id: uuid() },
-]
+];
 export const PwdBuilder = () => {
-  const [gridImages, setGridImages] = React.useState<Images[]>([...gridImagesArray])
-  const [pwdImages, setPwdImages] = React.useState<Images[] | any>([...pwdImagesArray])
-  const [pwdVisible, setPwdVisible] = React.useState<boolean>(false)
+  const [gridImages, setGridImages] = React.useState<Images[]>([...gridImagesArray]);
+  const [pwdImages, setPwdImages] = React.useState<Images[] | any>([...pwdImagesArray]);
+  const [pwdVisible, setPwdVisible] = React.useState<boolean>(false);
 
-  const [dragSource, setDragSource] = React.useState<string>('')
+  const [dragSource, setDragSource] = React.useState<string>('');
 
-  const [dragDestination, setDragDestination] = React.useState<string>('')
+  const [dragDestination, setDragDestination] = React.useState<string>('');
   const onDragStartHandler = (result: any) => {
-    setDragSource(result.source.droppableId)
-  }
+    setDragSource(result.source.droppableId);
+  };
 
   const onDragUpdateHandler = (result: any) => {
-    setDragDestination(result.destination?.droppableId)
-  }
+    setDragDestination(result.destination?.droppableId);
+  };
 
   function isPwdEmpty(objects: Images[]): boolean {
-    return objects.some((obj) => Boolean(obj.imageSrc))
+    return objects.some((obj) => Boolean(obj.imageSrc));
   }
   const dragEndHandler = (result: DropResult) => {
     if (pwdImages?.length > 8) {
-      return
+      return;
     }
     if (!result.destination) {
-      return
+      return;
     } else if (
       result.destination.droppableId === result.source.droppableId &&
       result.source.droppableId === 'pwdContainer'
     ) {
-      let activeImage = pwdImages[result.source.index]
-      let newPwdImages = [...pwdImages]
-      newPwdImages.splice(result.source.index, 1)
-      newPwdImages.splice(result.destination.index, 0, activeImage)
-      setPwdImages(newPwdImages)
+      const activeImage = pwdImages[result.source.index];
+      const newPwdImages = [...pwdImages];
+      newPwdImages.splice(result.source.index, 1);
+      newPwdImages.splice(result.destination.index, 0, activeImage);
+      setPwdImages(newPwdImages);
     } else if (
       result.destination.droppableId === result.source.droppableId &&
       result.source.droppableId === 'gridContainer'
     ) {
-      let activeImage = gridImages[result.source.index]
-      let newGridImages = [...gridImages]
-      newGridImages.splice(result.source.index, 1)
-      newGridImages.splice(result.destination.index, 0, activeImage)
-      setGridImages(newGridImages)
+      const activeImage = gridImages[result.source.index];
+      const newGridImages = [...gridImages];
+      newGridImages.splice(result.source.index, 1);
+      newGridImages.splice(result.destination.index, 0, activeImage);
+      setGridImages(newGridImages);
     } else if (result.destination.droppableId === 'pwdContainer' && result.source.droppableId === 'gridContainer') {
       if (isOnlyTwoSixImagesInPwd(pwdImages)) {
-        toast.error('You can only drag and drop six images.')
-        return
+        toast.error('You can only drag and drop six images.');
+        return;
       }
-      let activeImage = gridImages[result.source.index]
-      let newGridImages = [...gridImages]
-      newGridImages.splice(result.source.index, 1)
+      const activeImage = gridImages[result.source.index];
+      const newGridImages = [...gridImages];
+      newGridImages.splice(result.source.index, 1);
       newGridImages.splice(result.source.index, 0, {
         ...activeImage,
         id: uuid(),
-      })
-      setGridImages(newGridImages)
-      let newPwdImages = [...pwdImages]
-      newPwdImages.splice(result.destination.index, 1)
-      newPwdImages.splice(result.destination.index, 0, activeImage)
-      setPwdImages(newPwdImages)
+      });
+      setGridImages(newGridImages);
+      const newPwdImages = [...pwdImages];
+      newPwdImages.splice(result.destination.index, 1);
+      newPwdImages.splice(result.destination.index, 0, activeImage);
+      setPwdImages(newPwdImages);
     } else {
-      let newPwdImages = [...pwdImages]
-      newPwdImages.splice(result.source.index, 1)
+      const newPwdImages = [...pwdImages];
+      newPwdImages.splice(result.source.index, 1);
       newPwdImages.splice(result.source.index, 0, {
         id: uuid(),
-      })
-      setPwdImages(newPwdImages)
+      });
+      setPwdImages(newPwdImages);
     }
-  }
+  };
 
-  const { authFormDispatch } = useAuthProvider()
+  const { authFormDispatch } = useAuthProvider();
 
   const {
     uiState: { chosenRoute },
-  } = useUi()
+  } = useUi();
 
   useEffect(() => {
-    setGridImages([...readImages()])
-  }, [])
+    setGridImages([...readImages()]);
+  }, []);
 
   useEffect(() => {
     if (isPwdEmpty(pwdImages)) {
       authFormDispatch({
         type: AuthFormActionsTypes.SET_PWD_IMAGES,
         payload: pwdImages,
-      })
+      });
     }
-  }, [pwdImages, authFormDispatch])
+  }, [pwdImages, authFormDispatch]);
 
   const isOnlyTwoSixImagesInPwd = (pwdImages: Images[]) => {
     const filteredImages = pwdImages.filter((image) => {
-      return Boolean(image.imageSrc)
-    })
-    return filteredImages?.length === 6
-  }
+      return Boolean(image.imageSrc);
+    });
+    return filteredImages?.length === 6;
+  };
 
   return (
     <DragDropContext onDragEnd={dragEndHandler} onDragStart={onDragStartHandler} onDragUpdate={onDragUpdateHandler}>
@@ -174,5 +174,5 @@ export const PwdBuilder = () => {
         />
       </section>
     </DragDropContext>
-  )
-}
+  );
+};

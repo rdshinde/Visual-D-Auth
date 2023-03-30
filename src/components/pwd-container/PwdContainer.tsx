@@ -1,23 +1,23 @@
-import React from 'react'
-import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { ImageContainer } from '../image-container/ImageContainer'
-import { ImgCollector } from '../img-collector/ImgCollector'
-import { Images } from '../pwd-builder/PwdBuilder'
+import React from 'react';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { ImageContainer } from '../image-container/ImageContainer';
+import { ImgCollector } from '../img-collector/ImgCollector';
+import { Images } from '../pwd-builder/PwdBuilder';
 
 type Props = {
-  pwdImages: Images[] | any
-  pwdVisibility: boolean
-  dragSource: string
-  dragDestination: string
-}
+  pwdImages: Images[] | any;
+  pwdVisibility: boolean;
+  dragSource: string;
+  dragDestination: string;
+};
 
 export const PwdContainer = (props: Props) => {
-  const { pwdImages, dragSource, dragDestination } = props
+  const { pwdImages, dragSource, dragDestination } = props;
   function getStyle(style: any) {
     return {
       ...style,
       transform: dragSource === 'gridContainer' ? 'none' : style.transform,
-    }
+    };
   }
   return (
     <section
@@ -57,7 +57,7 @@ export const PwdContainer = (props: Props) => {
                     </div>
                   )}
                 </Draggable>
-              )
+              );
             })}
 
             {dragSource === 'gridContainer' ? '' : provided.placeholder}
@@ -65,5 +65,5 @@ export const PwdContainer = (props: Props) => {
         )}
       </Droppable>
     </section>
-  )
-}
+  );
+};

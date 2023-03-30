@@ -1,35 +1,35 @@
-import React, { useEffect } from 'react'
-import { useAuthProvider } from '../../context/auth/VisualDAuthProvider'
-import { AuthFormActionsTypes } from '../../context/typings.context'
+import React, { useEffect } from 'react';
+import { useAuthProvider } from '../../context/auth/VisualDAuthProvider';
+import { AuthFormActionsTypes } from '../../context/typings.context';
 
 type Props = {
-  labelName: string
-  inputType: string
-  mnemonicWord?: string
-  index?: number
-}
+  labelName: string;
+  inputType: string;
+  mnemonicWord?: string;
+  index?: number;
+};
 
 export const InputField = ({ labelName, inputType, mnemonicWord, index }: Props) => {
-  const [isWordValid, setIsWordValid] = React.useState<boolean>(false)
-  const [mnemonicWordInput, setMnemonicWordInput] = React.useState<string>('')
+  const [isWordValid, setIsWordValid] = React.useState<boolean>(false);
+  const [mnemonicWordInput, setMnemonicWordInput] = React.useState<string>('');
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMnemonicWordInput(e.target.value.trim())
-  }
+    setMnemonicWordInput(e.target.value.trim());
+  };
 
-  const { authFormDispatch } = useAuthProvider()
+  const { authFormDispatch } = useAuthProvider();
 
   useEffect(() => {
     if (mnemonicWordInput === mnemonicWord) {
       authFormDispatch({
         type: AuthFormActionsTypes.SET_USER_MNEMONIC_INPUT,
         payload: { index: index, word: mnemonicWordInput },
-      })
-      setIsWordValid(true)
+      });
+      setIsWordValid(true);
     } else {
-      setIsWordValid(false)
+      setIsWordValid(false);
     }
-  }, [mnemonicWordInput, authFormDispatch, index, mnemonicWord])
+  }, [mnemonicWordInput, authFormDispatch, index, mnemonicWord]);
 
   return (
     <div className={`mb-6 w-full`}>
@@ -58,5 +58,5 @@ export const InputField = ({ labelName, inputType, mnemonicWord, index }: Props)
         {isWordValid ? 'Looks good!' : 'Please enter the correct word.'}
       </span>
     </div>
-  )
-}
+  );
+};

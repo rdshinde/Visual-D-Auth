@@ -1,8 +1,8 @@
 // import env from 'react-dotenv'
 
-export const developmentContractAddress = '0x3ceBeB08201A0882Ce98aBC37231487c83063481'
+export const developmentContractAddress = '0x3ceBeB08201A0882Ce98aBC37231487c83063481';
 
-export const productionContractAddress = '0x3ceBeB08201A0882Ce98aBC37231487c83063481'
+export const productionContractAddress = '0x3ceBeB08201A0882Ce98aBC37231487c83063481';
 
 export const contractABI: any = [
   {
@@ -311,4 +311,4 @@ export const contractABI: any = [
     stateMutability: 'view',
     type: 'function',
   },
-]
+];

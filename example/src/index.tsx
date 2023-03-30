@@ -1,6 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { AuthButton, VisualDAuthProvider } from 'react-visual-d-auth'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AuthButton, VisualDAuthProvider } from 'react-visual-d-auth';
 ReactDOM.render(
   <React.StrictMode>
     <VisualDAuthProvider
@@ -19,4 +19,4 @@ ReactDOM.render(
     ,
   </React.StrictMode>,
   document.getElementById('root'),
-)
+);

@@ -1,14 +1,14 @@
-import { getSteps } from '../../utility'
-import { UiActions, UiActionsTypes, UiState } from '../typings.context'
+import { getSteps } from '../../utility';
+import { UiActions, UiActionsTypes, UiState } from '../typings.context';
 
 export const uiReducer = (state: UiState, action: UiActions): UiState => {
-  const { type, payload } = action
+  const { type, payload } = action;
   switch (type) {
     case UiActionsTypes.OPEN_MODAL:
       return {
         ...state,
         isModalOpen: true,
-      }
+      };
     case UiActionsTypes.CLOSE_MODAL:
       return {
         ...state,
@@ -18,23 +18,24 @@ export const uiReducer = (state: UiState, action: UiActions): UiState => {
         previousStep: '',
         nextStep: '',
         allSteps: [],
-      }
+      };
     case UiActionsTypes.SET_ROUTE:
       return {
         ...state,
         chosenRoute: payload,
-      }
-    case UiActionsTypes.SET_STEPS:
-      const steps = getSteps(payload)
+      };
+    case UiActionsTypes.SET_STEPS: {
+      const steps: any = getSteps(payload);
       return {
         ...state,
         currentStep: steps[0].stepName,
         nextStep: steps[1].stepName,
         previousStep: '',
         allSteps: [...steps],
-      }
-    case UiActionsTypes.GO_TO_NEXT_STEP:
-      let currentStepIndx = state.allSteps.findIndex((step) => step.stepName === state.currentStep)
+      };
+    }
+    case UiActionsTypes.GO_TO_NEXT_STEP: {
+      const currentStepIndx: number = state.allSteps.findIndex((step: any) => step.stepName === state.currentStep);
       return {
         ...state,
         currentStep: payload,
@@ -46,24 +47,28 @@ export const uiReducer = (state: UiState, action: UiActions): UiState => {
               ...step,
               isActive: true,
               isCompleted: false,
-            }
+            };
           } else if (index <= currentStepIndx) {
             return {
               ...step,
               isActive: false,
               isCompleted: true,
-            }
+            };
           } else if (index > currentStepIndx) {
             return {
               ...step,
               isActive: false,
               isCompleted: false,
-            }
-          } else return step
+            };
+          } else return step;
         }),
-      }
-    case UiActionsTypes.GO_TO_PREVIOUS_STEP:
-      let currentStepIndex = state.allSteps.findIndex((step) => step.stepName === state.currentStep)
+      };
+    }
+
+    case UiActionsTypes.GO_TO_PREVIOUS_STEP: {
+      const currentStepIndex: number = state.allSteps.findIndex((step: any) => {
+        return step.stepName === state.currentStep;
+      });
       return {
         ...state,
         currentStep: payload,
@@ -75,22 +80,23 @@ export const uiReducer = (state: UiState, action: UiActions): UiState => {
               ...step,
               isActive: true,
               isCompleted: false,
-            }
+            };
           } else if (index >= currentStepIndex) {
             return {
               ...step,
               isActive: false,
               isCompleted: false,
-            }
+            };
           } else if (index < currentStepIndex) {
             return {
               ...step,
               isActive: false,
               isCompleted: true,
-            }
-          } else return step
+            };
+          } else return step;
         }),
-      }
+      };
+    }
     case UiActionsTypes.RESET:
       return {
         ...state,
@@ -99,8 +105,8 @@ export const uiReducer = (state: UiState, action: UiActions): UiState => {
         nextStep: '',
         previousStep: '',
         allSteps: [],
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};

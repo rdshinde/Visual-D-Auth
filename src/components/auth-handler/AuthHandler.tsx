@@ -1,19 +1,19 @@
-import { AnimatePresence } from 'framer-motion'
-import React, { ReactNode, useEffect, useState } from 'react'
-import { useAuthProvider } from '../../context/auth/VisualDAuthProvider'
-import { useUi } from '../../context/ui/UiProvider'
-import { componentRenderingHandler } from '../../utility/componentRenderingHandler'
-import { AuthOptions } from '../auth-options/AuthOptions'
-import { FooterNav } from '../footer-navigation/FooterNav'
-import { IconContainer } from '../icon-container/IconContainer'
-import { Loader } from '../loader/Loader'
-import { StepperChain } from '../stepper/StepperChain'
+import { AnimatePresence } from 'framer-motion';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { useAuthProvider } from '../../context/auth/VisualDAuthProvider';
+import { useUi } from '../../context/ui/UiProvider';
+import { componentRenderingHandler } from '../../utility/componentRenderingHandler';
+import { AuthOptions } from '../auth-options/AuthOptions';
+import { FooterNav } from '../footer-navigation/FooterNav';
+import { IconContainer } from '../icon-container/IconContainer';
+import { Loader } from '../loader/Loader';
+import { StepperChain } from '../stepper/StepperChain';
 
 export const AuthHandler = () => {
-  const { uiState } = useUi()
-  const { isLoading } = useAuthProvider()
-  const { chosenRoute, allSteps, currentStep } = uiState
-  const [currentComponent, setCurrentComponent] = useState<ReactNode>(<AuthOptions />)
+  const { uiState } = useUi();
+  const { isLoading } = useAuthProvider();
+  const { chosenRoute, allSteps, currentStep } = uiState;
+  const [currentComponent, setCurrentComponent] = useState<ReactNode>(<AuthOptions />);
 
   useEffect(() => {
     setCurrentComponent(
@@ -21,8 +21,8 @@ export const AuthHandler = () => {
         {componentRenderingHandler(currentStep, chosenRoute)}
         <FooterNav />
       </>,
-    )
-  }, [uiState, currentStep, chosenRoute])
+    );
+  }, [uiState, currentStep, chosenRoute]);
   return (
     <div className={`relative w-full`}>
       <AnimatePresence>
@@ -49,5 +49,5 @@ export const AuthHandler = () => {
         </p>
       </footer>
     </div>
-  )
-}
+  );
+};

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const SmallSpinner = () => {
   return (
@@ -20,5 +20,5 @@ export const SmallSpinner = () => {
         />
       </svg>
     </span>
-  )
-}
+  );
+};

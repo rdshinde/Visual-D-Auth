@@ -1,33 +1,40 @@
-import { Props } from '../components/auth-button/AuthButton'
+import { Props } from '../components/auth-button/AuthButton';
+import { RouteNames, StepNames } from '../utility/getSteps';
 
 export type Image = {
-  id?: string
-  imageSrc?: string
-  imageAlt?: string
-}
+  id?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+};
 
 export type AuthFormState = {
-  username: string
-  pwdImages: Image[]
-  gridImages: Image[]
-  pwdHash: string
-  mnemonicPhrase: string
-  mnemonicPhraseHash: string
-  userMnemonicPhraseInput: string[]
+  username: string;
+  pwdImages: Image[];
+  gridImages: Image[];
+  pwdHash: string;
+  mnemonicPhrase: string;
+  mnemonicPhraseHash: string;
+  userMnemonicPhraseInput: string[];
   developerDetails?: {
-    mode?: string
-    privateKey?: string
-    publicKey?: string
-    useWindowWallet?: boolean
-  }
-}
+    mode?: string;
+    privateKey?: string;
+    publicKey?: string;
+    useWindowWallet?: boolean;
+  };
+};
 export type UseAuthProvider = {
-  authFormState: AuthFormState
-  authFormDispatch: React.Dispatch<any>
-  isLoading: boolean
-  contractMethodResponseHandler: Function
-  userMnemonicPhrase: string[]
-}
+  authFormState: AuthFormState;
+  authFormDispatch: React.Dispatch<any>;
+  isLoading: boolean;
+  contractMethodResponseHandler: (
+    currentStep: StepNames,
+    chosenRoute: RouteNames,
+    allSteps: any,
+    currentStepIndex: number,
+    uiDispatch: React.Dispatch<any>,
+  ) => void;
+  userMnemonicPhrase: string[];
+};
 
 export enum AuthFormActionsTypes {
   SET_USERNAME = 'SET_USERNAME',
@@ -42,32 +49,32 @@ export enum AuthFormActionsTypes {
 }
 
 export type AuthFormActions = {
-  type: AuthFormActionsTypes
-  payload?: any
-}
+  type: AuthFormActionsTypes;
+  payload?: any;
+};
 export type Message = {
-  type?: 'success' | 'error' | 'warning' | 'info' | ''
-  description?: string | ''
-}
+  type?: 'success' | 'error' | 'warning' | 'info' | '';
+  description?: string | '';
+};
 export type UiState = {
-  isModalOpen: boolean
-  chosenRoute: 'login' | 'register' | 'recover' | ''
-  currentStep: 'Username' | 'Password' | 'Verify' | 'Done!' | ''
-  previousStep: 'Username' | 'Password' | 'Verify' | 'Done!' | any
-  nextStep: 'Username' | 'Password' | 'Verify' | 'Done!' | any
+  isModalOpen: boolean;
+  chosenRoute: RouteNames | any;
+  currentStep: StepNames | '';
+  previousStep: StepNames | '';
+  nextStep: StepNames | '';
   allSteps: {
-    stepName: 'Username' | 'Password' | 'Verify' | 'Done!'
-    stepNumber: number
-    isActive: boolean
-    isCompleted: boolean
-  }[]
-}
+    stepName: StepNames | '';
+    stepNumber: number;
+    isActive: boolean;
+    isCompleted: boolean;
+  }[];
+};
 
 export type UseUi = {
-  uiState: UiState
-  uiDispatch: React.Dispatch<any>
-  AuthButton: React.FC<Props>
-}
+  uiState: UiState;
+  uiDispatch: React.Dispatch<any>;
+  AuthButton: React.FC<Props>;
+};
 
 export enum UiActionsTypes {
   OPEN_MODAL = 'OPEN_MODAL',
@@ -80,6 +87,6 @@ export enum UiActionsTypes {
 }
 
 export type UiActions = {
-  type: UiActionsTypes
-  payload?: any
-}
+  type: UiActionsTypes;
+  payload?: any;
+};

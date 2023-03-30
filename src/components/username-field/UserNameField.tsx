@@ -1,51 +1,51 @@
-import React from 'react'
-import { useAuthProvider } from '../../context/auth/VisualDAuthProvider'
-import { AuthFormActionsTypes, Message } from '../../context/typings.context'
-import { useUi } from '../../context/ui/UiProvider'
-import { RouteNames } from '../../utility/getSteps'
+import React from 'react';
+import { useAuthProvider } from '../../context/auth/VisualDAuthProvider';
+import { AuthFormActionsTypes, Message } from '../../context/typings.context';
+import { useUi } from '../../context/ui/UiProvider';
+import { RouteNames } from '../../utility/getSteps';
 
 export const UserNameField = () => {
   const {
     authFormDispatch,
     authFormState: { username },
-  } = useAuthProvider()
+  } = useAuthProvider();
 
   const [validationMessage, setValidationMessage] = React.useState<Message>({
     description: '',
     type: '',
-  })
+  });
 
   const setUsernameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value.trim()
+    const inputValue = e.target.value.trim();
     if (inputValue.length > 10) {
       setValidationMessage({
         description: 'Username should be less than 10 characters',
         type: 'error',
-      })
+      });
     } else if (inputValue.length < 3) {
       setValidationMessage({
         description: 'Username should be more than 3 characters',
         type: 'error',
-      })
+      });
     } else if (inputValue.length === 0) {
       setValidationMessage({
         description: 'Username should not be empty',
         type: 'error',
-      })
+      });
     } else {
       setValidationMessage({
         description: 'Looks Good!',
         type: 'success',
-      })
+      });
     }
     authFormDispatch({
       type: AuthFormActionsTypes.SET_USERNAME,
       payload: inputValue,
-    })
-  }
+    });
+  };
   const {
     uiState: { chosenRoute },
-  } = useUi()
+  } = useUi();
 
   return (
     <>
@@ -56,7 +56,7 @@ export const UserNameField = () => {
           </h2>
           {chosenRoute === RouteNames.REGISTER ? (
             <span className='font-bold text-md text-bluelight'>
-              Please choose a username which is" <span className='text-orange font-semibold'>unique</span> to you.
+              Please choose a username which is <span className='text-orange font-semibold'>unique</span> to you.
             </span>
           ) : (
             <span className='font-bold text-md text-bluelight'>
@@ -90,5 +90,5 @@ export const UserNameField = () => {
         </span>
       </section>
     </>
-  )
-}
+  );
+};

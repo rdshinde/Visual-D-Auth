@@ -6,7 +6,7 @@ export const IconContainer = () => {
       <h1 className='flex items-center justify-center'>
         <span className='bg-bluelight opacity-80 sm:w-[50px] sm:h-[50px] xl:w-[75px] xl:h-[75px] p-2 rounded-full mx-3 relative -z-10  shadow-lg shadow-indigo-500'>
           <img
-            src='logo.png'
+            src='../images/logo.png'
             className='sm:w-[50px] xl:w-[75px] absolute left-1 -top-1 z-10 opacity-100 '
             loading='lazy'
             alt='logo'

@@ -1,7 +1,6 @@
 import React from 'react';
 import { UiActionsTypes } from '../../context/typings.context';
 import { useUi } from '../../context/ui/UiProvider';
-import '../../assets/tailwind/tailwind.css';
 
 export type Props = {
   children?: React.ReactNode;

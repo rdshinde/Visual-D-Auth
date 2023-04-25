@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import '../../assets/tailwind/tailwind.css';
 type Props = {
   children: React.ReactNode;
   styles?: React.CSSProperties;

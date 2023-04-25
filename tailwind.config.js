@@ -1,6 +1,11 @@
-import('tailwindcss').Config;
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+  purge: {
+    content: ['./src/**/*.{js,jsx,ts,tsx}'],
+    options: {
+      safelist: ['bg-blue-500', 'text-red-500'],
+    },
+  },
   important: true,
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -33,5 +38,6 @@ module.exports = {
       },
     },
   },
+  host: 'localhost',
   // plugins: [require('tw-elements/dist/plugin')],
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AuthButton, VisualDAuthProvider } from 'visual-d-auth';
-import 'react-visual-d-auth/dist/styles/tailwind.css';
+import { AuthButton, VisualDAuthProvider } from 'react-visual-d-auth';
+// import 'react-visual-d-auth/dist/styles/tailwind.css';
 // import '../../dist/styles.css';
 ReactDOM.render(
   <React.StrictMode>

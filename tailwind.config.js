@@ -39,5 +39,4 @@ module.exports = {
     },
   },
   host: 'localhost',
-  // plugins: [require('tw-elements/dist/plugin')],
 };

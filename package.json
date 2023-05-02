@@ -1,6 +1,6 @@
 {
   "name": "react-visual-d-auth",
-  "version": "1.0.21",
+  "version": "1.0.23",
   "description": "NPM package for your projects decentralised graphical password authentication.",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -19,6 +19,15 @@
     "plugins": {
       "tailwindcss": {}
     }
+  },
+  "jest": {
+    "modulePaths": [
+      "src/**/*"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",

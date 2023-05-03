@@ -18,9 +18,6 @@ declare global {
   }
 }
 
-// const web3 = new Web3(window.ethereum);
-// const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-
 /**
  * @param {string} contractMethod - Any method from ContractMethods
  * @param {string} mode - "Production" or "Development"
@@ -63,16 +60,50 @@ export const fetchContractMethod = async (
   } else if (mode === 'Development' && !useWindowWallet) {
     contractAddress = developmentContractAddress;
     web3 = new Web3(new Web3.providers.HttpProvider('https://goerli.infura.io/v3/bcd48c1e38574c1697634dfd5c66edf4'));
-    // web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-  } else if (mode === 'Production' && useWindowWallet) {
-    contractAddress = productionContractAddress;
-    web3 = new Web3(window.ethereum);
-  } else if (mode === 'Development' && useWindowWallet) {
-    contractAddress = developmentContractAddress;
-    web3 = new Web3(window.ethereum);
+  } else if (useWindowWallet) {
+    try {
+      if (mode.toLowerCase() === 'production') {
+        contractAddress = productionContractAddress;
+        if (window.ethereum) {
+          alert('Open metamask and accept the connection request.');
+          web3 = new Web3(window.ethereum);
+          await window.ethereum.enable();
+          const networkId = await web3.eth.net.getId();
+          if (networkId !== 1) {
+            await window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0x1' }],
+            });
+            throw new Error('Please switch to the Ethereum Mainnet.');
+          }
+        } else {
+          throw new Error('Please install MetaMask to use this dApp.');
+        }
+      } else if (mode.toLowerCase() === 'development') {
+        contractAddress = developmentContractAddress;
+        if (window.ethereum) {
+          alert('Open metamask and accept the connection request.');
+          web3 = new Web3(window.ethereum);
+          await window.ethereum.enable();
+          const networkId = await web3.eth.net.getId();
+          if (networkId !== 5) {
+            await window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0x5' }],
+            });
+            throw new Error('Please switch to the Goerli Test Network.');
+          }
+        } else {
+          throw new Error('Please install MetaMask to use this dApp.');
+        }
+      } else {
+        throw new Error('Invalid mode specified.');
+      }
+    } catch (error: any) {
+      alert(error.message);
+    }
   } else {
-    contractAddress = developmentContractAddress;
-    web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
+    alert('Unable to connect to the blockchain. Please check your connections.');
   }
 
   const account = await web3.eth.getAccounts().then((accounts: any) => accounts[0]);

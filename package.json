@@ -1,6 +1,6 @@
 {
   "name": "react-visual-d-auth",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "NPM package for your projects decentralised graphical password authentication.",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

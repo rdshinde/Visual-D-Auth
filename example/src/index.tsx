@@ -17,7 +17,7 @@ ReactDOM.render(
       }}
     >
       <div id='auth-form'>
-        <AuthButton />
+        <AuthButton/>
       </div>
     </VisualDAuthProvider>
   </React.StrictMode>,

@@ -49,7 +49,7 @@ Step 1: Import the package in your project and wrap your app with the VisualDAut
 
 ```tsx
 import React, { useState } from 'react'
-import { VisualDAuthProvider } from 'visual-d-auth'
+import { VisualDAuthProvider } from 'react-visual-d-auth'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
@@ -73,7 +73,7 @@ Step 2: Import the AuthButton component and use it in your project. You need to 
 
 ```tsx
 import React from 'react'
-import { AuthButton } from 'visual-d-auth'
+import { AuthButton } from 'react-visual-d-auth'
 
 const App = () => {
   return (
@@ -90,7 +90,7 @@ export default App
 
 ```tsx
 import React from 'react'
-import { AuthButton } from 'visual-d-auth'
+import { AuthButton } from 'react-visual-d-auth'
 
 const App = () => {
   return (

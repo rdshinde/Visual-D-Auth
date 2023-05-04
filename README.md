@@ -33,7 +33,7 @@ Visual-D-Auth is a NPM package that allows you to use your wallet to authenticat
 ## Installation
 
 ```bash
-npm install visual-d-auth
+npm install react-visual-d-auth
 ```
 
 ## Usage in React

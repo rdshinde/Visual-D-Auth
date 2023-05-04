@@ -2,8 +2,8 @@
 
 The NPM package for your projects decentralised graphical password authentication.
 
-[npm-image]: https://img.shields.io/npm/v/react-visual-d-auth.svg
-[npm-url]: https://www.npmjs.com/package/react-visual-d-auth
+[![Version](https://img.shields.io/badge/version-1.0.25-blue.svg)](https://github.com/your_username/your_project)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/your_username/your_project/blob/master/LICENSE)
 
 [github-build]: [https://github.com/rdshinde/Visual-D-Auth]
 [github-build-url]: [https://github.com/rdshinde/Visual-D-Auth]

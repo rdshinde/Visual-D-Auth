@@ -22,7 +22,7 @@ const readImages = () => {
   for (let i = 1; i <= 24; i++) {
     images.push({
       id: uuid(),
-      imageSrc: `https://picsum.photos/150/150?random=${i}`,
+      imageSrc: `https://ipfs.io/ipfs/bafybeidbry2h67i23pldo6mq4hxlvqsu53osjh34pllzxbxepopy2hkj6i/${i}.png`,
       imageAlt: uuid(),
     });
   }

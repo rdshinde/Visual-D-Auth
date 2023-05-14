@@ -22,7 +22,7 @@ const readImages = () => {
   for (let i = 1; i <= 24; i++) {
     images.push({
       id: uuid(),
-      imageSrc: `https://ipfs.io/ipfs/bafybeidbry2h67i23pldo6mq4hxlvqsu53osjh34pllzxbxepopy2hkj6i/${i}.png`,
+      imageSrc: `https://beta-visualdauth.vercel.app/images2/${i}.png`,
       imageAlt: uuid(),
     });
   }

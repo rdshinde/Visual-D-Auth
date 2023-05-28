@@ -59,22 +59,30 @@ export const fetchContractMethod = async (
     web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/bcd48c1e38574c1697634dfd5c66edf4'));
   } else if (mode === 'Development' && !useWindowWallet) {
     contractAddress = developmentContractAddress;
-    web3 = new Web3(new Web3.providers.HttpProvider('https://goerli.infura.io/v3/bcd48c1e38574c1697634dfd5c66edf4'));
+    web3 = new Web3(new Web3.providers.HttpProvider('https://sepolia.infura.io/v3/5a9b43984c1445868bb4108d0672b753'));
   } else if (useWindowWallet) {
     try {
       if (mode.toLowerCase() === 'production') {
         contractAddress = productionContractAddress;
         if (window.ethereum) {
-          alert('Open metamask and accept the connection request.');
           web3 = new Web3(window.ethereum);
-          await window.ethereum.enable();
+          const isConnected = window.ethereum.selectedAddress !== undefined;
+          if (!isConnected) {
+            alert('Open MetaMask and accept the connection request.');
+            await window.ethereum.enable();
+          }
           const networkId = await web3.eth.net.getId();
-          if (networkId !== 1) {
+          const expectedNetworkId = '0x1'; // Chain ID for the Ethereum Mainnet
+          if (networkId !== expectedNetworkId) {
+            window.ethereum.on('chainChanged', (chainId: string) => {
+              if (chainId !== expectedNetworkId) {
+                throw new Error('Please switch to the Ethereum Mainnet.');
+              }
+            });
             await window.ethereum.request({
               method: 'wallet_switchEthereumChain',
-              params: [{ chainId: '0x1' }],
+              params: [{ chainId: expectedNetworkId }],
             });
-            throw new Error('Please switch to the Ethereum Mainnet.');
           }
         } else {
           throw new Error('Please install MetaMask to use this dApp.');
@@ -82,16 +90,27 @@ export const fetchContractMethod = async (
       } else if (mode.toLowerCase() === 'development') {
         contractAddress = developmentContractAddress;
         if (window.ethereum) {
-          alert('Open metamask and accept the connection request.');
           web3 = new Web3(window.ethereum);
-          await window.ethereum.enable();
+          const isConnected = window.ethereum.selectedAddress;
+          console.log(isConnected);
+          if (!isConnected) {
+            alert('Open MetaMask and accept the connection request.');
+            await window.ethereum.enable();
+          }
           const networkId = await web3.eth.net.getId();
-          if (networkId !== 5) {
+          const expectedNetworkId = '0xaa36a7'; // Chain ID for the Sepolia Test Network
+
+          if (networkId !== expectedNetworkId) {
+            window.ethereum.on('chainChanged', (chainId: string) => {
+              if (chainId !== expectedNetworkId) {
+                throw new Error('Please switch to the Sepolia Test Network.');
+              }
+            });
+
             await window.ethereum.request({
               method: 'wallet_switchEthereumChain',
-              params: [{ chainId: '0x5' }],
+              params: [{ chainId: expectedNetworkId }],
             });
-            throw new Error('Please switch to the Goerli Test Network.');
           }
         } else {
           throw new Error('Please install MetaMask to use this dApp.');

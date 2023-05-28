@@ -113,7 +113,7 @@ Thats it! You are now ready to use the package in your react project. You can al
 
 - The public key of your wallet. This is the address of your wallet. You can get this from the wallet you are using. For example, if you are using Metamask, you can get this from the Metamask extension. If you are using the wallet in the window object, you can get this from the window object.
 
-- For Development mode, VisualDAuthProvider is using the Goerli testnet. You can get a testnet wallet from [here](https://goerli-faucet.slock.it/), and get some testnet ETH from [here](https://goerli-faucet.slock.it/).
+- For Development mode, VisualDAuthProvider is using the Sepolia testnet. You can get a testnet wallet from [here](https://sepoliafaucet.com/), and get some testnet ETH from [here](https://sepoliafaucet.com/).
 
 - For Production mode, VisualDAuthProvider is using the Ethereum mainnet. You can get a mainnet wallet from [here](https://metamask.io/), and get some mainnet ETH from [here](https://faucet.metamask.io/).
 
@@ -121,7 +121,7 @@ Thats it! You are now ready to use the package in your react project. You can al
 
 - The private key of your wallet. You can get this from the wallet you are using. For example, if you are using Metamask, you can get this from the Metamask extension. If you are using the wallet in the window object, you can get this from the window object.
 
-- For Development mode, VisualDAuthProvider is using the Goerli testnet. You can get a testnet wallet from [here](https://goerli-faucet.slock.it/), and get some testnet ETH from [here](https://goerli-faucet.slock.it/).
+- For Development mode, VisualDAuthProvider is using the Sepolia testnet. You can get a testnet wallet from [here](https://sepoliafaucet.com/), and get some testnet ETH from [here](https://sepoliafaucet.com/).
 
 - For Production mode, VisualDAuthProvider is using the Ethereum mainnet. You can get a mainnet wallet from [here](https://metamask.io/), and get some mainnet ETH from [here](https://faucet.metamask.io/).
 

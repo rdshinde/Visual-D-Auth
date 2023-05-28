@@ -2,7 +2,7 @@
 
 The NPM package for your projects decentralised graphical password authentication.
 
-[![Version](https://img.shields.io/badge/version-1.0.28-blue.svg)](https://github.com/your_username/your_project)
+[![Version](https://img.shields.io/badge/version-1.0.29-blue.svg)](https://github.com/your_username/your_project)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/your_username/your_project/blob/master/LICENSE)
 
 [github-build]: [https://github.com/rdshinde/Visual-D-Auth]

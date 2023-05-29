@@ -58,20 +58,44 @@ contract Users {
         return usernameAvailabilityMessage;
     }
 
-    struct LoginUserMsg{
+    struct LoginUserMsg {
         string message;
         bool result;
-        bool status; 
+        bool status;
+        string username;
+        bytes32 userId;
     }
-    function loginRegisteredUser(string memory username, string memory password) public view returns(LoginUserMsg memory){
-        if(UserExixts[username] == false){
+
+    function loginRegisteredUser(string memory username, string memory password)
+        public
+        view
+        returns (LoginUserMsg memory)
+    {
+         if(UserExixts[username] == false){
             revert("User is not Registered.");
         }
-        if(keccak256(abi.encodePacked(UserDataBase[username].username)) == keccak256(abi.encodePacked(username)) && keccak256(abi.encodePacked(UserDataBase[username].password)) == keccak256(abi.encodePacked(password))){
-            LoginUserMsg memory loginUserMessageSuccess = LoginUserMsg("User login successful!", true , true);
+        if (
+            keccak256(abi.encodePacked(UserDataBase[username].username)) ==
+            keccak256(abi.encodePacked(username)) &&
+            keccak256(abi.encodePacked(UserDataBase[username].password)) ==
+            keccak256(abi.encodePacked(password))
+        ) {
+            LoginUserMsg memory loginUserMessageSuccess = LoginUserMsg(
+                "User login successful!",
+                true,
+                true,
+                UserDataBase[username].username,
+                UserDataBase[username].userId
+            );
             return loginUserMessageSuccess;
         }
-        LoginUserMsg memory loginUserMessage = LoginUserMsg("User login failed!", false , true);
+        LoginUserMsg memory loginUserMessage = LoginUserMsg(
+            "User login failed!",
+            false,
+            true,
+            "",
+            ""
+        );
         return loginUserMessage;
     }
     struct VerifyMnemonicMsg{

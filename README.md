@@ -2,14 +2,13 @@
 
 The NPM package for your projects decentralised graphical password authentication.
 
-[![Version](https://img.shields.io/badge/version-1.0.29-blue.svg)](https://github.com/your_username/your_project)
+[![Version](https://img.shields.io/badge/version-1.0.33-blue.svg)](https://github.com/your_username/your_project)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/your_username/your_project/blob/master/LICENSE)
 
 [github-build]: [https://github.com/rdshinde/Visual-D-Auth]
 [github-build-url]: [https://github.com/rdshinde/Visual-D-Auth]
 [npm-typescript]: [https://img.shields.io/npm/types/react-visual-d-auth]
 [github-license]: [https://img.shields.io/github/license/rdshinde/Visual-D-Auth]
-
 
 ## Table of Contents
 
@@ -48,10 +47,10 @@ Step 1: Import the package in your project and wrap your app with the VisualDAut
 - onSuccessHandler: A function to handle success
 
 ```tsx
-import React, { useState } from 'react'
-import { VisualDAuthProvider } from 'react-visual-d-auth'
+import React, { useState } from 'react';
+import { VisualDAuthProvider } from 'react-visual-d-auth';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <VisualDAuthProvider
     publicKey={WALLET_ADDRESS}
@@ -63,7 +62,7 @@ root.render(
   >
     <App />
   </VisualDAuthProvider>,
-)
+);
 ```
 
 Step 2: Import the AuthButton component and use it in your project. You need to pass in the following props:
@@ -72,25 +71,25 @@ Step 2: Import the AuthButton component and use it in your project. You need to 
 - className: The class name of the button (optional)
 
 ```tsx
-import React from 'react'
-import { AuthButton } from 'react-visual-d-auth'
+import React from 'react';
+import { AuthButton } from 'react-visual-d-auth';
 
 const App = () => {
   return (
     <div>
       <AuthButton />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 ## OR
 
 ```tsx
-import React from 'react'
-import { AuthButton } from 'react-visual-d-auth'
+import React from 'react';
+import { AuthButton } from 'react-visual-d-auth';
 
 const App = () => {
   return (
@@ -99,10 +98,10 @@ const App = () => {
         <div>Custom Button</div>
       </AuthButton>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 Thats it! You are now ready to use the package in your react project. You can also check out the example project in the examples folder.
@@ -143,6 +142,19 @@ Thats it! You are now ready to use the package in your react project. You can al
 
 - A function to handle success. This function will be called when the authentication process is successful. The function will be passed the result object as a parameter.
 
+- On Suceesful login, the result object will contain the following properties:
+
+```tsx
+const result = {
+  message: "User login successful!",
+  userLogin: true,
+  status: true,
+  username: "rdshinde",
+  userId: "0xbba7b2973ae1c3137fd9565eb15c9ffbc2d406d5599c5d650cf61a66debbadbb",
+  action: "User Login."
+}
+```
+
 ## Instructions for AuthButton props
 
 ### 1.styles
@@ -152,7 +164,7 @@ Thats it! You are now ready to use the package in your react project. You can al
 ```tsx
 const styles = {
   backgroundColor: 'red',
-}
+};
 ```
 
 ### 2.className
@@ -160,7 +172,7 @@ const styles = {
 - The class name of the button. You can pass in the class name as a string. For example, if you want to add a class name to the button, you can pass in the following string:
 
 ```tsx
-const className = 'my-class-name'
+const className = 'my-class-name';
 ```
 
 ## Support

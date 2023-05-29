@@ -23,6 +23,8 @@ export const loginRegisteredUser = async (
       message: result.message,
       userLogin: result.result,
       status: result.status,
+      username: result.username,
+      userId: result.userId,
     };
     return resultObj;
   } catch (err: any) {
